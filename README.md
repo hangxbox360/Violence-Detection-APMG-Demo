@@ -275,9 +275,35 @@ The real-time demo runs APMG on a live stream and raises a smoothed alarm.
 
 ---
 
-## 5. Usage
+## 5. Motion-gate visualization (all 16 frames)
 
-- Clips: H.264 `.mp4`, 10 fps, 1238×260 (panel); GIFs are smaller previews of the same clips. They play in any browser or standard player.
+What the motion gate does over a whole test clip, for the *best violent* clip of each dataset (Batch 1). Each video steps through the 16 frames the models read (4 fps) and shows four panels:
+
+**frame | frame difference ‖x<sub>t</sub> − x<sub>t−1</sub>‖ | gate of the original MSM (Kang et al.) | gate of APMG (ours)**
+
+Both gates come from the trained networks (seed 42; SURV: the fold model that tested the clip). Each gate is colour-scaled to its own range over the clip (magma: dark = low, bright = high). *r* = correlation between the gate and the frame difference in that frame (both averaged to a 7×7 grid).
+
+| Dataset | Clip | APMG: frames with r < 0 (median r) | Original MSM: frames with r < 0 (median r) | Video |
+|:--|:--|:--:|:--:|:--|
+| Hockey Fight | `fi88_xvid.avi` | 16/16 (−0.98) | 0/16 (+0.89) | [MP4](gate_visualization/hockey_gate.mp4) |
+| SURV | `fi040.mp4` | 16/16 (−0.92) | 16/16 (−0.57) | [MP4](gate_visualization/surv_gate.mp4) |
+| RLVS | `V_293.mp4` | 0/16 (+0.74) | 0/16 (+0.79) | [MP4](gate_visualization/rlvs_gate.mp4) |
+| RWF-2000 | `Violence/7gLKFV5voOg_0.avi` | 16/16 (−0.98) | 11/16 (−0.21) | [MP4](gate_visualization/rwfreal_gate.mp4) |
+| UBI-Fights | `F_107_1_2_0_0.mp4` | 16/16 (−0.99) | 16/16 (−0.91) | [MP4](gate_visualization/ubi_gate.mp4) |
+
+<table>
+<tr><td align="center"><img src="gate_visualization/hockey_gate.gif" width="100%"><br><sub>Hockey Fight · <code>fi88_xvid.avi</code></sub></td></tr>
+<tr><td align="center"><img src="gate_visualization/surv_gate.gif" width="100%"><br><sub>SURV · <code>fi040.mp4</code></sub></td></tr>
+<tr><td align="center"><img src="gate_visualization/rlvs_gate.gif" width="100%"><br><sub>RLVS · <code>V_293.mp4</code></sub></td></tr>
+<tr><td align="center"><img src="gate_visualization/rwfreal_gate.gif" width="100%"><br><sub>RWF-2000 · <code>Violence/7gLKFV5voOg_0.avi</code></sub></td></tr>
+<tr><td align="center"><img src="gate_visualization/ubi_gate.gif" width="100%"><br><sub>UBI-Fights · <code>F_107_1_2_0_0.mp4</code></sub></td></tr>
+</table>
+
+---
+
+## 6. Usage
+
+- Clips: H.264 `.mp4`, 10 fps, 1238×260 (panel); GIFs are smaller previews of the same clips. They play in any browser or standard player. Gate videos (Section 5): H.264, 4 fps, 896×246.
 - `results/showcase_manifest.csv` — every clip: dataset, case, truth, P(violence) of all seven models.
 
 > These are rendered outputs (overlays and plot are part of the pixels) and cannot be fed back into a model. To run inference, obtain the original videos from the datasets below.
