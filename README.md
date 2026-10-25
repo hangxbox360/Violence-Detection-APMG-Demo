@@ -6,14 +6,14 @@ Qualitative inference demos of **APMG (ours)**, a video violence-detection model
 
 ## 1. Introduction
 
-This repository contains **47 short clips** (MP4 + GIF) from the held-out **test** splits of five public benchmarks, plus one real-time demo. **Batch 1** holds four rule-selected clips per dataset (best and worst for each class), **Batch 2** best and bad clips under specific conditions (camera motion, brightness, temporal sampling, comparison with the strongest comparators), and Section 4 a live-stream run.
+This repository contains **49 short clips** (MP4 + GIF) from the held-out **test** splits of five public benchmarks, plus one real-time demo. **Batch 1** holds four rule-selected clips per dataset (best and worst for each class), **Batch 2** best and bad clips under specific conditions (camera motion, brightness, temporal sampling, comparison with the strongest comparators), and Section 4 a live-stream run.
 
 **These are pre-rendered visualization clips, not the raw benchmark datasets.** Each `.mp4` is a side-by-side panel:
 
 - **Left** — the clip with APMG's decision: label and confidence bar, border **red = predicted violent**, **green = predicted non-violent**.
 - **Right** — P(violence) over time for **APMG (ours, solid)** and six comparators (dashed): Kang et al., DualCascade-TSF, KianNet, SE-MobileNet, SepConvLSTM, VGG19-LSTM. At every frame each model re-samples its input from the frames seen so far, so the last point equals the model's whole-clip test prediction.
 
-**How the clips were chosen** (fixed rules, no hand-picking). APMG was trained with three seeds (SURV: five cross-validation folds). *best* = correct for every seed with the highest probability of the true class; *bad* = wrong for the majority of seeds with the most confident error; *hardest* = the least confident correct clip when a dataset has no error of that kind. The videos show the **seed-42** model (SURV: the fold model that had the clip in its test fold, never one trained on it), so a bad case can be correct for seed 42 — the table gives both. ✗ = wrong decision. Long UBI clips are shown uniformly sampled to 360 frames. Note: the DualCascade-TSF curves use a checkpoint re-trained after an interruption, whose decisions differ from its reported test predictions on a few clips (RLVS 2/300, RWF-2000 11/273, Hockey none); all other models reproduce their test predictions (|ΔP| < 0.01).
+**How the clips were chosen** (fixed rules, no hand-picking). APMG was trained with three seeds (SURV: five cross-validation folds). *best* = correct for every seed with the highest probability of the true class; *bad* = wrong for the majority of seeds with the most confident error; *hardest* = the least confident correct clip when a dataset has no error of that kind. The videos show the **seed-42** model (SURV: the fold model that had the clip in its test fold, never one trained on it), so a bad case can be correct for seed 42 — the table gives both. ✗ = wrong decision. Long UBI clips are shown uniformly sampled to 360 frames. Note: two comparator curves use checkpoints re-trained after an interruption, whose decisions differ from the reported test predictions on some clips: DualCascade-TSF on RLVS (2/300) and SE-MobileNet on RWF-2000 (99/400); all other curves reproduce the test predictions (|ΔP| < 0.01).
 
 ---
 
@@ -83,19 +83,19 @@ This repository contains **47 short clips** (MP4 + GIF) from the held-out **test
 
 | Case | Clip | Truth | APMG 3-seed p<sub>true</sub> (seeds correct) | APMG (ours) | Kang et al. | DualCascade-TSF | KianNet | SE-MobileNet | SepConvLSTM | VGG19-LSTM |
 |:--|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|
-| best violent | [`v_RLVS_a_0_0.mp4`](best_bad_cases/rwf2000/class_best_true_violent_v_RLVS_a_0_0.mp4) | Violence | 0.99 (3/3) | **0.99** | 0.99 | 1.00 | 0.98 | 0.90 | 1.00 | 1.00 |
-| best non-violent | [`v_ApplyEyeMakeup_g24_c03.avi`](best_bad_cases/rwf2000/class_best_true_non_violent_v_ApplyEyeMakeup_g24_c03.mp4) | Normal | 0.97 (3/3) | **0.02** | 0.00 | 0.00 | 0.05 | 0.50 | 0.00 | 0.00 |
-| bad FN (missed violence) | [`v_SUMO_d_1.avi`](best_bad_cases/rwf2000/class_bad_true_violent_v_SUMO_d_1.mp4) | Violence | 0.03 (0/3) | **0.03 ✗** | 0.93 | 0.01 ✗ | 0.76 | 0.04 ✗ | 0.01 ✗ | 1.00 |
-| bad FP (false alarm) | [`no_fight_58.mp4`](best_bad_cases/rwf2000/class_bad_true_non_violent_no_fight_58.mp4) | Normal | 0.02 (0/3) | **0.98 ✗** | 0.95 ✗ | 1.00 ✗ | 0.97 ✗ | 0.93 ✗ | 0.99 ✗ | 1.00 ✗ |
+| best violent | [`7gLKFV5voOg_0.avi`](best_bad_cases/rwfreal/class_best_true_violent_7gLKFV5voOg_0.mp4) | Violence | 0.97 (3/3) | **0.95** | 0.97 | 0.51 | 0.98 | 0.19 ✗ | 0.59 | 0.66 |
+| best non-violent | [`I9OYGpUd_0.avi`](best_bad_cases/rwfreal/class_best_true_non_violent_I9OYGpUd_0.mp4) | Normal | 0.97 (3/3) | **0.02** | 0.00 | 0.02 | 0.02 | 0.10 | 0.02 | 0.02 |
+| bad FN (missed violence) | [`I-QiUMPTWNE_8.avi`](best_bad_cases/rwfreal/class_bad_true_violent_I-QiUMPTWNE_8.mp4) | Violence | 0.04 (0/3) | **0.03 ✗** | 0.01 ✗ | 0.51 | 0.98 | 0.09 ✗ | 0.54 | 0.68 |
+| bad FP (false alarm) | [`Wq0BuA8GM84_0.avi`](best_bad_cases/rwfreal/class_bad_true_non_violent_Wq0BuA8GM84_0.mp4) | Normal | 0.04 (0/3) | **0.93 ✗** | 0.83 ✗ | 0.28 | 0.03 | 0.86 ✗ | 0.24 | 0.66 ✗ |
 
 <table>
 <tr>
-<td align="center" width="50%"><img src="best_bad_cases/rwf2000/class_best_true_violent_v_RLVS_a_0_0.gif" width="100%"><br><sub><b>best violent</b> · <code>v_RLVS_a_0_0.mp4</code> (truth: Violence)</sub></td>
-<td align="center" width="50%"><img src="best_bad_cases/rwf2000/class_best_true_non_violent_v_ApplyEyeMakeup_g24_c03.gif" width="100%"><br><sub><b>best non-violent</b> · <code>v_ApplyEyeMakeup_g24_c03.avi</code> (truth: Normal)</sub></td>
+<td align="center" width="50%"><img src="best_bad_cases/rwfreal/class_best_true_violent_7gLKFV5voOg_0.gif" width="100%"><br><sub><b>best violent</b> · <code>7gLKFV5voOg_0.avi</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="best_bad_cases/rwfreal/class_best_true_non_violent_I9OYGpUd_0.gif" width="100%"><br><sub><b>best non-violent</b> · <code>I9OYGpUd_0.avi</code> (truth: Normal)</sub></td>
 </tr>
 <tr>
-<td align="center" width="50%"><img src="best_bad_cases/rwf2000/class_bad_true_violent_v_SUMO_d_1.gif" width="100%"><br><sub><b>bad FN (missed violence)</b> · <code>v_SUMO_d_1.avi</code> (truth: Violence)</sub></td>
-<td align="center" width="50%"><img src="best_bad_cases/rwf2000/class_bad_true_non_violent_no_fight_58.gif" width="100%"><br><sub><b>bad FP (false alarm)</b> · <code>no_fight_58.mp4</code> (truth: Normal)</sub></td>
+<td align="center" width="50%"><img src="best_bad_cases/rwfreal/class_bad_true_violent_I-QiUMPTWNE_8.gif" width="100%"><br><sub><b>bad FN (missed violence)</b> · <code>I-QiUMPTWNE_8.avi</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="best_bad_cases/rwfreal/class_bad_true_non_violent_Wq0BuA8GM84_0.gif" width="100%"><br><sub><b>bad FP (false alarm)</b> · <code>Wq0BuA8GM84_0.avi</code> (truth: Normal)</sub></td>
 </tr>
 </table>
 
@@ -135,9 +135,9 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 | RLVS | HARDEST · Low camera motion | [`NV_638.mp4`](condition_cases/rlvs/motion_hardest_low_camera_motion_NV_638.mp4) | Normal | 0.83 (3/3) | **0.02** | 0.01 | 0.01 | 0.04 | 0.75 ✗ | 0.01 | 0.03 |
 | RLVS | BEST · High camera motion | [`V_171.mp4`](condition_cases/rlvs/motion_best_high_camera_motion_V_171.mp4) | Violence | 0.98 (3/3) | **0.98** | 0.98 | 1.00 | 0.98 | 0.67 | 1.00 | 1.00 |
 | RLVS | BAD · High camera motion | [`NV_558.mp4`](condition_cases/rlvs/motion_bad_high_camera_motion_NV_558.mp4) | Normal | 0.31 (1/3) | **0.91 ✗** | 0.65 ✗ | 0.03 | 0.06 | 0.71 ✗ | 0.68 ✗ | 0.72 ✗ |
-| RWF-2000 | BEST · Low camera motion | [`v_RLVS_a_1_1.mp4`](condition_cases/rwf2000/motion_best_low_camera_motion_v_RLVS_a_1_1.mp4) | Violence | 0.98 (3/3) | **0.99** | 0.99 | 1.00 | 0.98 | 0.92 | 1.00 | 1.00 |
-| RWF-2000 | BEST · High camera motion | [`v_PNCH_h_31.mp4`](condition_cases/rwf2000/motion_best_high_camera_motion_v_PNCH_h_31.mp4) | Violence | 0.98 (3/3) | **0.98** | 1.00 | 1.00 | 0.98 | 0.67 | 0.98 | 1.00 |
-| RWF-2000 | BAD · High camera motion | [`v_CRWD_-_1.avi`](condition_cases/rwf2000/motion_bad_high_camera_motion_v_CRWD_-_1.mp4) | Violence | 0.03 (0/3) | **0.04 ✗** | 0.63 | 0.95 | 0.98 | 0.39 ✗ | 0.06 ✗ | 0.01 ✗ |
+| RWF-2000 | BAD · Low camera motion | [`XM0NI7ZmwWM_3.avi`](condition_cases/rwfreal/motion_bad_low_camera_motion_XM0NI7ZmwWM_3.mp4) | Violence | 0.05 (0/3) | **0.08 ✗** | 0.01 ✗ | 0.88 | 0.03 ✗ | 0.00 ✗ | 0.28 ✗ | 0.58 |
+| RWF-2000 | BEST · High camera motion | [`g6jdqkcdgqk_5.avi`](condition_cases/rwfreal/motion_best_high_camera_motion_g6jdqkcdgqk_5.mp4) | Violence | 0.97 (3/3) | **0.95** | 0.62 | 0.98 | 0.93 | 0.76 | 0.67 | 0.67 |
+| RWF-2000 | BAD · High camera motion | [`RIXaF_TkLlU_2.avi`](condition_cases/rwfreal/motion_bad_high_camera_motion_RIXaF_TkLlU_2.mp4) | Normal | 0.04 (0/3) | **0.93 ✗** | 0.23 | 0.11 | 0.98 ✗ | 0.73 ✗ | 0.87 ✗ | 0.68 ✗ |
 | UBI-Fights | BEST · Low camera motion | [`F_89_1_0_0_0.mp4`](condition_cases/ubi/motion_best_low_camera_motion_F_89_1_0_0_0.mp4) | Violence | 0.98 (3/3) | **0.96** | 0.99 | 0.96 | 0.79 | 0.97 | 0.98 | 0.99 |
 | UBI-Fights | BAD · High camera motion | [`N_253_0_0_1_0.mp4`](condition_cases/ubi/motion_bad_high_camera_motion_N_253_0_0_1_0.mp4) | Normal | 0.37 (1/3) | **0.79 ✗** | 0.91 ✗ | 0.85 ✗ | 0.15 | 0.03 | 0.52 ✗ | 1.00 ✗ |
 
@@ -157,11 +157,11 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 <td align="center" width="50%"><img src="condition_cases/rlvs/motion_bad_high_camera_motion_NV_558.gif" width="100%"><br><sub><b>BAD · High camera motion</b> · <code>NV_558.mp4</code> (truth: Normal)</sub></td>
 </tr>
 <tr>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/motion_best_low_camera_motion_v_RLVS_a_1_1.gif" width="100%"><br><sub><b>BEST · Low camera motion</b> · <code>v_RLVS_a_1_1.mp4</code> (truth: Violence)</sub></td>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/motion_best_high_camera_motion_v_PNCH_h_31.gif" width="100%"><br><sub><b>BEST · High camera motion</b> · <code>v_PNCH_h_31.mp4</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/motion_bad_low_camera_motion_XM0NI7ZmwWM_3.gif" width="100%"><br><sub><b>BAD · Low camera motion</b> · <code>XM0NI7ZmwWM_3.avi</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/motion_best_high_camera_motion_g6jdqkcdgqk_5.gif" width="100%"><br><sub><b>BEST · High camera motion</b> · <code>g6jdqkcdgqk_5.avi</code> (truth: Violence)</sub></td>
 </tr>
 <tr>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/motion_bad_high_camera_motion_v_CRWD_-_1.gif" width="100%"><br><sub><b>BAD · High camera motion</b> · <code>v_CRWD_-_1.avi</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/motion_bad_high_camera_motion_RIXaF_TkLlU_2.gif" width="100%"><br><sub><b>BAD · High camera motion</b> · <code>RIXaF_TkLlU_2.avi</code> (truth: Normal)</sub></td>
 <td align="center" width="50%"><img src="condition_cases/ubi/motion_best_low_camera_motion_F_89_1_0_0_0.gif" width="100%"><br><sub><b>BEST · Low camera motion</b> · <code>F_89_1_0_0_0.mp4</code> (truth: Violence)</sub></td>
 </tr>
 <tr>
@@ -180,7 +180,8 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 | Surveillance Camera Fight | BEST · Dark (lowest-brightness tercile) | [`fi139.mp4`](condition_cases/surv/brightness_best_dark__lowest_brightness_tercile_fi139.mp4) | Violence | 0.99 (CV fold) | **0.99** | 0.74 | 0.87 | 0.99 | 0.97 | 0.07 ✗ | 0.64 |
 | Surveillance Camera Fight | BEST · Bright (highest-brightness tercile) | [`nofi067.mp4`](condition_cases/surv/brightness_best_bright__highest_brightness_tercile_nofi067.mp4) | Normal | 0.99 (CV fold) | **0.01** | 0.01 | 0.08 | 0.02 | 0.79 ✗ | 0.17 | 0.05 |
 | RLVS | HARDEST · Bright (highest-brightness tercile) | [`NV_98.mp4`](condition_cases/rlvs/brightness_hardest_bright__highest_brightness_tercile_NV_98.mp4) | Normal | 0.44 (2/3) | **0.37** | 0.15 | 0.16 | 0.06 | 0.34 | 0.61 ✗ | 0.00 |
-| RWF-2000 | BEST · Bright (highest-brightness tercile) | [`v_FTSN_-_10.mp4`](condition_cases/rwf2000/brightness_best_bright__highest_brightness_tercile_v_FTSN_-_10.mp4) | Violence | 0.98 (3/3) | **0.98** | 1.00 | 1.00 | 0.98 | 0.96 | 1.00 | 1.00 |
+| RWF-2000 | BEST · Dark (lowest-brightness tercile) | [`Yma07mlW_0.avi`](condition_cases/rwfreal/brightness_best_dark__lowest_brightness_tercile_Yma07mlW_0.mp4) | Normal | 0.97 (3/3) | **0.02** | 0.01 | 0.04 | 0.03 | 0.20 | 0.25 | 0.01 |
+| RWF-2000 | BEST · Bright (highest-brightness tercile) | [`fGyFpyjd_0.avi`](condition_cases/rwfreal/brightness_best_bright__highest_brightness_tercile_fGyFpyjd_0.mp4) | Normal | 0.97 (3/3) | **0.02** | 0.01 | 0.00 | 0.02 | 0.00 | 0.09 | 0.23 |
 | UBI-Fights | BEST · Dark (lowest-brightness tercile) | [`F_120_1_0_0_0.mp4`](condition_cases/ubi/brightness_best_dark__lowest_brightness_tercile_F_120_1_0_0_0.mp4) | Violence | 0.99 (3/3) | **0.99** | 0.94 | 0.99 | 0.99 | 1.00 | 1.00 | 1.00 |
 | UBI-Fights | BAD · Bright (highest-brightness tercile) | [`F_151_0_0_1_0.mp4`](condition_cases/ubi/brightness_bad_bright__highest_brightness_tercile_F_151_0_0_1_0.mp4) | Violence | 0.08 (0/3) | **0.08 ✗** | 0.00 ✗ | 0.00 ✗ | 0.17 ✗ | 0.09 ✗ | 0.02 ✗ | 0.01 ✗ |
 
@@ -197,10 +198,13 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 </tr>
 <tr>
 <td align="center" width="50%"><img src="condition_cases/rlvs/brightness_hardest_bright__highest_brightness_tercile_NV_98.gif" width="100%"><br><sub><b>HARDEST · Bright (highest-brightness tercile)</b> · <code>NV_98.mp4</code> (truth: Normal)</sub></td>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/brightness_best_bright__highest_brightness_tercile_v_FTSN_-_10.gif" width="100%"><br><sub><b>BEST · Bright (highest-brightness tercile)</b> · <code>v_FTSN_-_10.mp4</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/brightness_best_dark__lowest_brightness_tercile_Yma07mlW_0.gif" width="100%"><br><sub><b>BEST · Dark (lowest-brightness tercile)</b> · <code>Yma07mlW_0.avi</code> (truth: Normal)</sub></td>
 </tr>
 <tr>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/brightness_best_bright__highest_brightness_tercile_fGyFpyjd_0.gif" width="100%"><br><sub><b>BEST · Bright (highest-brightness tercile)</b> · <code>fGyFpyjd_0.avi</code> (truth: Normal)</sub></td>
 <td align="center" width="50%"><img src="condition_cases/ubi/brightness_best_dark__lowest_brightness_tercile_F_120_1_0_0_0.gif" width="100%"><br><sub><b>BEST · Dark (lowest-brightness tercile)</b> · <code>F_120_1_0_0_0.mp4</code> (truth: Violence)</sub></td>
+</tr>
+<tr>
 <td align="center" width="50%"><img src="condition_cases/ubi/brightness_bad_bright__highest_brightness_tercile_F_151_0_0_1_0.gif" width="100%"><br><sub><b>BAD · Bright (highest-brightness tercile)</b> · <code>F_151_0_0_1_0.mp4</code> (truth: Violence)</sub></td>
 </tr>
 </table>
@@ -213,8 +217,8 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 |:--|:--|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|
 | Surveillance Camera Fight | FRAGILE · Temporal sampling (9 conditions) | [`nofi011.mp4`](condition_cases/surv/temporal_fragile_temporal_sampling__9_conditions_nofi011.mp4) | Normal | 0.51 (CV fold) | **0.49** | 0.54 ✗ | 0.28 | 0.05 | 1.00 ✗ | 0.71 ✗ | 0.54 ✗ |
 | RLVS | ROBUST · Temporal sampling (9 conditions) | [`V_868.mp4`](condition_cases/rlvs/temporal_robust_temporal_sampling__9_conditions_V_868.mp4) | Violence | 0.98 (3/3) | **0.98** | 1.00 | 1.00 | 0.98 | 0.57 | 0.99 | 1.00 |
-| RWF-2000 | ROBUST · Temporal sampling (9 conditions) | [`v_RLVS_a_0_1.mp4`](condition_cases/rwf2000/temporal_robust_temporal_sampling__9_conditions_v_RLVS_a_0_1.mp4) | Violence | 0.98 (3/3) | **0.99** | 1.00 | 1.00 | 0.98 | 0.91 | 1.00 | 1.00 |
-| RWF-2000 | FRAGILE · Temporal sampling (9 conditions) | [`no_fight_60.mp4`](condition_cases/rwf2000/temporal_fragile_temporal_sampling__9_conditions_no_fight_60.mp4) | Normal | 0.47 (2/3) | **0.87 ✗** | 0.80 ✗ | 0.89 ✗ | 0.72 ✗ | 0.09 | 0.12 | 0.96 ✗ |
+| RWF-2000 | ROBUST · Temporal sampling (9 conditions) | [`q4jlVJRb_0.avi`](condition_cases/rwfreal/temporal_robust_temporal_sampling__9_conditions_q4jlVJRb_0.mp4) | Normal | 0.97 (3/3) | **0.02** | 0.00 | 0.01 | 0.02 | 0.50 | 0.07 | 0.02 |
+| RWF-2000 | FRAGILE · Temporal sampling (9 conditions) | [`48J5lk4QcpE_0.avi`](condition_cases/rwfreal/temporal_fragile_temporal_sampling__9_conditions_48J5lk4QcpE_0.mp4) | Violence | 0.43 (2/3) | **0.54** | 0.63 | 0.21 ✗ | 0.98 | 0.63 | 0.66 | 0.78 |
 | UBI-Fights | FRAGILE · Temporal sampling (9 conditions) | [`F_153_1_1_0_0.mp4`](condition_cases/ubi/temporal_fragile_temporal_sampling__9_conditions_F_153_1_1_0_0.mp4) | Violence | 0.77 (2/3) | **0.91** | 0.49 ✗ | 0.63 | 0.13 ✗ | 0.00 ✗ | 0.57 | 0.17 ✗ |
 
 <details><summary>GIFs</summary>
@@ -225,8 +229,8 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 <td align="center" width="50%"><img src="condition_cases/rlvs/temporal_robust_temporal_sampling__9_conditions_V_868.gif" width="100%"><br><sub><b>ROBUST · Temporal sampling (9 conditions)</b> · <code>V_868.mp4</code> (truth: Violence)</sub></td>
 </tr>
 <tr>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/temporal_robust_temporal_sampling__9_conditions_v_RLVS_a_0_1.gif" width="100%"><br><sub><b>ROBUST · Temporal sampling (9 conditions)</b> · <code>v_RLVS_a_0_1.mp4</code> (truth: Violence)</sub></td>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/temporal_fragile_temporal_sampling__9_conditions_no_fight_60.gif" width="100%"><br><sub><b>FRAGILE · Temporal sampling (9 conditions)</b> · <code>no_fight_60.mp4</code> (truth: Normal)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/temporal_robust_temporal_sampling__9_conditions_q4jlVJRb_0.gif" width="100%"><br><sub><b>ROBUST · Temporal sampling (9 conditions)</b> · <code>q4jlVJRb_0.avi</code> (truth: Normal)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/temporal_fragile_temporal_sampling__9_conditions_48J5lk4QcpE_0.gif" width="100%"><br><sub><b>FRAGILE · Temporal sampling (9 conditions)</b> · <code>48J5lk4QcpE_0.avi</code> (truth: Violence)</sub></td>
 </tr>
 <tr>
 <td align="center" width="50%"><img src="condition_cases/ubi/temporal_fragile_temporal_sampling__9_conditions_F_153_1_1_0_0.gif" width="100%"><br><sub><b>FRAGILE · Temporal sampling (9 conditions)</b> · <code>F_153_1_1_0_0.mp4</code> (truth: Violence)</sub></td>
@@ -241,7 +245,8 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 |:--|:--|:--|:--|--:|--:|--:|--:|--:|--:|--:|--:|
 | Surveillance Camera Fight | APMG WINS · APMG vs Kang / DualCascade / KianNet | [`nofi057.mp4`](condition_cases/surv/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_nofi057.mp4) | Normal | 0.85 (CV fold) | **0.15** | 0.80 ✗ | 0.93 ✗ | 0.96 ✗ | 1.00 ✗ | 0.70 ✗ | 0.73 ✗ |
 | Surveillance Camera Fight | APMG LOSES · APMG vs Kang / DualCascade / KianNet | [`fi019.mp4`](condition_cases/surv/compare_apmg_loses_apmg_vs_kang___dualcascade___kiannet_fi019.mp4) | Violence | 0.03 (CV fold) | **0.03 ✗** | 0.77 | 0.55 | 0.67 | 1.00 | 0.97 | 0.73 |
-| RWF-2000 | APMG WINS · APMG vs Kang / DualCascade / KianNet | [`dntt_ovr_19.avi`](condition_cases/rwf2000/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_dntt_ovr_19.mp4) | Normal | 0.76 (3/3) | **0.46** | 0.77 ✗ | 0.52 ✗ | 0.96 ✗ | 0.45 | 0.22 | 0.94 ✗ |
+| RWF-2000 | APMG WINS · APMG vs Kang / DualCascade / KianNet | [`g6jdqkcdgqk_4.avi`](condition_cases/rwfreal/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_g6jdqkcdgqk_4.mp4) | Violence | 0.93 (3/3) | **0.94** | 0.01 ✗ | 0.58 | 0.97 | 0.56 | 0.75 | 0.68 |
+| RWF-2000 | APMG LOSES · APMG vs Kang / DualCascade / KianNet | [`2lrARl7utL4_2.avi`](condition_cases/rwfreal/compare_apmg_loses_apmg_vs_kang___dualcascade___kiannet_2lrARl7utL4_2.mp4) | Normal | 0.06 (0/3) | **0.94 ✗** | 0.10 | 0.79 ✗ | 0.03 | 0.56 ✗ | 0.54 ✗ | 0.66 ✗ |
 
 <details><summary>GIFs</summary>
 
@@ -251,7 +256,8 @@ Conditions: camera ego-motion (lowest / highest tercile of the clip's global-mot
 <td align="center" width="50%"><img src="condition_cases/surv/compare_apmg_loses_apmg_vs_kang___dualcascade___kiannet_fi019.gif" width="100%"><br><sub><b>APMG LOSES · APMG vs Kang / DualCascade / KianNet</b> · <code>fi019.mp4</code> (truth: Violence)</sub></td>
 </tr>
 <tr>
-<td align="center" width="50%"><img src="condition_cases/rwf2000/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_dntt_ovr_19.gif" width="100%"><br><sub><b>APMG WINS · APMG vs Kang / DualCascade / KianNet</b> · <code>dntt_ovr_19.avi</code> (truth: Normal)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_g6jdqkcdgqk_4.gif" width="100%"><br><sub><b>APMG WINS · APMG vs Kang / DualCascade / KianNet</b> · <code>g6jdqkcdgqk_4.avi</code> (truth: Violence)</sub></td>
+<td align="center" width="50%"><img src="condition_cases/rwfreal/compare_apmg_loses_apmg_vs_kang___dualcascade___kiannet_2lrARl7utL4_2.gif" width="100%"><br><sub><b>APMG LOSES · APMG vs Kang / DualCascade / KianNet</b> · <code>2lrARl7utL4_2.avi</code> (truth: Normal)</sub></td>
 </tr>
 </table>
 
@@ -286,14 +292,14 @@ Both gates come from the trained networks (seed 42; SURV: the fold model that te
 | Dataset | Clip | APMG: frames with r < 0 (median r) | Original MSM: frames with r < 0 (median r) | Video |
 |:--|:--|:--:|:--:|:--|
 | Hockey Fight | `fi88_xvid.avi` | 16/16 (−0.98) | 0/16 (+0.89) | [MP4](gate_visualization/hockey_gate.mp4) |
-| SURV | `fi040.mp4` | 16/16 (−0.92) | 16/16 (−0.57) | [MP4](gate_visualization/surv_gate.mp4) |
+| Surveillance Camera Fight | `fi040.mp4` | 16/16 (−0.92) | 16/16 (−0.57) | [MP4](gate_visualization/surv_gate.mp4) |
 | RLVS | `V_293.mp4` | 0/16 (+0.74) | 0/16 (+0.79) | [MP4](gate_visualization/rlvs_gate.mp4) |
 | RWF-2000 | `Violence/7gLKFV5voOg_0.avi` | 16/16 (−0.98) | 11/16 (−0.21) | [MP4](gate_visualization/rwfreal_gate.mp4) |
 | UBI-Fights | `F_107_1_2_0_0.mp4` | 16/16 (−0.99) | 16/16 (−0.91) | [MP4](gate_visualization/ubi_gate.mp4) |
 
 <table>
 <tr><td align="center"><img src="gate_visualization/hockey_gate.gif" width="100%"><br><sub>Hockey Fight · <code>fi88_xvid.avi</code></sub></td></tr>
-<tr><td align="center"><img src="gate_visualization/surv_gate.gif" width="100%"><br><sub>SURV · <code>fi040.mp4</code></sub></td></tr>
+<tr><td align="center"><img src="gate_visualization/surv_gate.gif" width="100%"><br><sub>Surveillance Camera Fight · <code>fi040.mp4</code></sub></td></tr>
 <tr><td align="center"><img src="gate_visualization/rlvs_gate.gif" width="100%"><br><sub>RLVS · <code>V_293.mp4</code></sub></td></tr>
 <tr><td align="center"><img src="gate_visualization/rwfreal_gate.gif" width="100%"><br><sub>RWF-2000 · <code>Violence/7gLKFV5voOg_0.avi</code></sub></td></tr>
 <tr><td align="center"><img src="gate_visualization/ubi_gate.gif" width="100%"><br><sub>UBI-Fights · <code>F_107_1_2_0_0.mp4</code></sub></td></tr>
@@ -317,7 +323,7 @@ The underlying footage is derived from public violence-detection benchmarks. Ple
 - **Hockey Fight** — E. Bermejo Nievas, O. Deniz Suarez, G. Bueno García, R. Sukthankar, *"Violence Detection in Video Using Computer Vision Techniques,"* CAIP, 2011.
 - **SURV (Surveillance Camera Fight)** — Ş. Aktı, G. A. Tataroğlu, H. K. Ekenel, *"Vision-based Fight Detection from Surveillance Cameras,"* IPTA, 2019.
 - **RLVS (Real-Life Violence Situations)** — M. M. Soliman *et al.,* *"Violence Recognition from Videos Using Deep Learning Techniques,"* ICICIS, 2019.
-- **RWF-2000** — M. Cheng, K. Cai, M. Li, *"RWF-2000: An Open Large Scale Video Database for Violence Detection,"* ICPR, 2020. (The copy used here is a composite collection distributed under this name.)
+- **RWF-2000** — M. Cheng, K. Cai, M. Li, *"RWF-2000: An Open Large Scale Video Database for Violence Detection,"* ICPR, 2020.
 - **UBI-Fights** — B. Degardin, H. Proença, *"Iterative Weak/Self-Supervised Classification Framework for Abnormal Events Detection,"* Pattern Recognition Letters, 2021.
 
 ## Citation

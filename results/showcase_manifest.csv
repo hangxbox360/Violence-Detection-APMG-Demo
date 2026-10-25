@@ -26,17 +26,19 @@ rlvs,BEST · High camera motion,V_171.mp4,Violence,0.983,0.9843,0.996,0.979,0.67
 rlvs,BAD · High camera motion,NV_558.mp4,Normal,0.9088,0.6451,0.0282,0.0605,0.7136,0.6834,0.7189,0.3083,condition_cases/rlvs/motion_bad_high_camera_motion_NV_558.mp4
 rlvs,HARDEST · Bright (highest-brightness tercile),NV_98.mp4,Normal,0.3651,0.1504,0.1555,0.0572,0.3393,0.6147,0.0029,0.4445,condition_cases/rlvs/brightness_hardest_bright__highest_brightness_tercile_NV_98.mp4
 rlvs,ROBUST · Temporal sampling (9 conditions),V_868.mp4,Violence,0.9824,0.9978,0.9988,0.9811,0.5725,0.9907,0.9999,0.9814,condition_cases/rlvs/temporal_robust_temporal_sampling__9_conditions_V_868.mp4
-rwf2000,best violent,v_RLVS_a_0_0.mp4,Violence,0.9868,0.9913,1.0,0.9807,0.8989,0.9994,1.0,0.9851,best_bad_cases/rwf2000/class_best_true_violent_v_RLVS_a_0_0.mp4
-rwf2000,bad FN (missed violence),v_SUMO_d_1.avi,Violence,0.0263,0.9332,0.0108,0.7605,0.0394,0.0129,0.999,0.028,best_bad_cases/rwf2000/class_bad_true_violent_v_SUMO_d_1.mp4
-rwf2000,best non-violent,v_ApplyEyeMakeup_g24_c03.avi,Normal,0.0194,0.0001,0.0004,0.0497,0.4976,0.0022,0.0,0.9744,best_bad_cases/rwf2000/class_best_true_non_violent_v_ApplyEyeMakeup_g24_c03.mp4
-rwf2000,bad FP (false alarm),no_fight_58.mp4,Normal,0.9792,0.9452,0.9967,0.9715,0.93,0.9859,0.9981,0.0223,best_bad_cases/rwf2000/class_bad_true_non_violent_no_fight_58.mp4
-rwf2000,BEST · Low camera motion,v_RLVS_a_1_1.mp4,Violence,0.9857,0.9872,1.0,0.9805,0.9197,0.9967,1.0,0.9848,condition_cases/rwf2000/motion_best_low_camera_motion_v_RLVS_a_1_1.mp4
-rwf2000,BEST · High camera motion,v_PNCH_h_31.mp4,Violence,0.9822,0.9957,0.9993,0.9758,0.6734,0.9843,0.9999,0.9831,condition_cases/rwf2000/motion_best_high_camera_motion_v_PNCH_h_31.mp4
-rwf2000,BAD · High camera motion,v_CRWD_-_1.avi,Violence,0.0373,0.6318,0.9475,0.9786,0.3937,0.064,0.0103,0.0334,condition_cases/rwf2000/motion_bad_high_camera_motion_v_CRWD_-_1.mp4
-rwf2000,BEST · Bright (highest-brightness tercile),v_FTSN_-_10.mp4,Violence,0.9798,0.9968,1.0,0.9805,0.9581,0.9989,0.9999,0.9801,condition_cases/rwf2000/brightness_best_bright__highest_brightness_tercile_v_FTSN_-_10.mp4
-rwf2000,ROBUST · Temporal sampling (9 conditions),v_RLVS_a_0_1.mp4,Violence,0.9873,0.9995,1.0,0.9811,0.9135,0.9994,1.0,0.985,condition_cases/rwf2000/temporal_robust_temporal_sampling__9_conditions_v_RLVS_a_0_1.mp4
-rwf2000,FRAGILE · Temporal sampling (9 conditions),no_fight_60.mp4,Normal,0.8654,0.8005,0.8941,0.7228,0.0917,0.1229,0.9594,0.4679,condition_cases/rwf2000/temporal_fragile_temporal_sampling__9_conditions_no_fight_60.mp4
-rwf2000,APMG WINS · APMG vs Kang / DualCascade / KianNet,dntt_ovr_19.avi,Normal,0.4557,0.7687,0.5194,0.9572,0.4462,0.2163,0.9387,0.7635,condition_cases/rwf2000/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_dntt_ovr_19.mp4
+rwfreal,best violent,7gLKFV5voOg_0.avi,Violence,0.9464,0.9689,0.505,0.9764,0.1921,0.5948,0.6636,0.9686,best_bad_cases/rwfreal/class_best_true_violent_7gLKFV5voOg_0.mp4
+rwfreal,bad FN (missed violence),I-QiUMPTWNE_8.avi,Violence,0.026,0.0059,0.5122,0.9786,0.0943,0.5374,0.6829,0.0407,best_bad_cases/rwfreal/class_bad_true_violent_I-QiUMPTWNE_8.mp4
+rwfreal,best non-violent,I9OYGpUd_0.avi,Normal,0.0244,0.0014,0.0157,0.0223,0.0979,0.0223,0.0225,0.9735,best_bad_cases/rwfreal/class_best_true_non_violent_I9OYGpUd_0.mp4
+rwfreal,bad FP (false alarm),Wq0BuA8GM84_0.avi,Normal,0.9301,0.8308,0.2806,0.0319,0.8604,0.2399,0.6605,0.0385,best_bad_cases/rwfreal/class_bad_true_non_violent_Wq0BuA8GM84_0.mp4
+rwfreal,BAD · Low camera motion,XM0NI7ZmwWM_3.avi,Violence,0.0793,0.0102,0.8773,0.0309,0.0,0.2798,0.5819,0.0509,condition_cases/rwfreal/motion_bad_low_camera_motion_XM0NI7ZmwWM_3.mp4
+rwfreal,BEST · High camera motion,g6jdqkcdgqk_5.avi,Violence,0.9508,0.6226,0.9772,0.9266,0.7554,0.6653,0.6681,0.9686,condition_cases/rwfreal/motion_best_high_camera_motion_g6jdqkcdgqk_5.mp4
+rwfreal,BAD · High camera motion,RIXaF_TkLlU_2.avi,Normal,0.9264,0.2331,0.1073,0.9765,0.7337,0.871,0.6754,0.0417,condition_cases/rwfreal/motion_bad_high_camera_motion_RIXaF_TkLlU_2.mp4
+rwfreal,BEST · Dark (lowest-brightness tercile),Yma07mlW_0.avi,Normal,0.0233,0.0082,0.0394,0.025,0.1987,0.254,0.0122,0.9732,condition_cases/rwfreal/brightness_best_dark__lowest_brightness_tercile_Yma07mlW_0.mp4
+rwfreal,BEST · Bright (highest-brightness tercile),fGyFpyjd_0.avi,Normal,0.0219,0.0057,0.0001,0.024,0.0,0.0913,0.2263,0.9717,condition_cases/rwfreal/brightness_best_bright__highest_brightness_tercile_fGyFpyjd_0.mp4
+rwfreal,ROBUST · Temporal sampling (9 conditions),q4jlVJRb_0.avi,Normal,0.0171,0.0004,0.0054,0.0246,0.4999,0.0712,0.0198,0.9727,condition_cases/rwfreal/temporal_robust_temporal_sampling__9_conditions_q4jlVJRb_0.mp4
+rwfreal,FRAGILE · Temporal sampling (9 conditions),48J5lk4QcpE_0.avi,Violence,0.5386,0.6312,0.2056,0.9782,0.6325,0.6582,0.7849,0.4296,condition_cases/rwfreal/temporal_fragile_temporal_sampling__9_conditions_48J5lk4QcpE_0.mp4
+rwfreal,APMG WINS · APMG vs Kang / DualCascade / KianNet,g6jdqkcdgqk_4.avi,Violence,0.9444,0.0108,0.5806,0.9701,0.5558,0.7462,0.6775,0.9349,condition_cases/rwfreal/compare_apmg_wins_apmg_vs_kang___dualcascade___kiannet_g6jdqkcdgqk_4.mp4
+rwfreal,APMG LOSES · APMG vs Kang / DualCascade / KianNet,2lrARl7utL4_2.avi,Normal,0.9406,0.0975,0.7919,0.0278,0.564,0.5412,0.6563,0.0602,condition_cases/rwfreal/compare_apmg_loses_apmg_vs_kang___dualcascade___kiannet_2lrARl7utL4_2.mp4
 ubi,best violent,F_107_1_2_0_0.mp4,Violence,0.9918,0.997,0.9977,0.9945,0.9957,0.9821,0.9981,0.9923,best_bad_cases/ubi/class_best_true_violent_F_107_1_2_0_0.mp4
 ubi,bad FN (missed violence),F_156_1_0_1_0.mp4,Violence,0.0416,0.5979,0.0,0.0979,0.0202,0.0281,0.0398,0.0676,best_bad_cases/ubi/class_bad_true_violent_F_156_1_0_1_0.mp4
 ubi,best non-violent,N_758_1_1_1_0.mp4,Normal,0.0263,0.6614,0.741,0.3627,0.3814,0.3671,0.1515,0.9412,best_bad_cases/ubi/class_best_true_non_violent_N_758_1_1_1_0.mp4
